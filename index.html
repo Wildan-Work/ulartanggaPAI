@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ular Tangga PAI: Daulah Usmaniyah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9eff7;
+  --surface:#ffffff;
+  --surface-2:#f2f6fb;
+  --ink:#14233f;
+  --muted:#51627e;
+  --lapis:#1d4286;
+  --lapis-ink:#ffffff;
+  --coral:#c8372a;
+  --turq:#0f8d8a;
+  --gold:#c58f12;
+  --line:#c9d5e6;
+  --cell-a:#dbe7f6;
+  --cell-b:#c3d6ee;
+  --quiz:#f6d36a;
+  --quiz-ink:#5a4000;
+  --ladder:#7a4a1e;
+  --good:#117a43;
+  --bad:#b3261e;
+  --shadow:0 6px 20px rgba(20,35,63,.12);
+  --font-head:"Amiri","Georgia","Times New Roman",serif;
+  --font-body:"Nunito Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1427;
+    --surface:#12203b;
+    --surface-2:#182a4a;
+    --ink:#e8eefb;
+    --muted:#9fb1d1;
+    --lapis:#7da4ee;
+    --lapis-ink:#0a1427;
+    --coral:#ff7a6b;
+    --turq:#3cc9c4;
+    --gold:#e8b53a;
+    --line:#2b4268;
+    --cell-a:#17294a;
+    --cell-b:#1f3560;
+    --quiz:#7a5d12;
+    --quiz-ink:#ffe9a8;
+    --ladder:#d19a5c;
+    --good:#4ad28a;
+    --bad:#ff8a80;
+    --shadow:0 6px 20px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a1427;
+  --surface:#12203b;
+  --surface-2:#182a4a;
+  --ink:#e8eefb;
+  --muted:#9fb1d1;
+  --lapis:#7da4ee;
+  --lapis-ink:#0a1427;
+  --coral:#ff7a6b;
+  --turq:#3cc9c4;
+  --gold:#e8b53a;
+  --line:#2b4268;
+  --cell-a:#17294a;
+  --cell-b:#1f3560;
+  --quiz:#7a5d12;
+  --quiz-ink:#ffe9a8;
+  --ladder:#d19a5c;
+  --good:#4ad28a;
+  --bad:#ff8a80;
+  --shadow:0 6px 20px rgba(0,0,0,.4);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;min-height:100%;
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.5;
+  background-image:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--lapis) 14%, transparent) 1px, transparent 0);
+  background-size:22px 22px;
+}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-head);margin:0;line-height:1.15}
+
+.screen{display:none}
+.screen.active{display:block}
+
+/* ---------- Layar awal ---------- */
+.setup{max-width:760px;margin:0 auto;padding:28px 18px 48px}
+.hero{
+  background:var(--lapis);color:var(--lapis-ink);
+  border-radius:20px;padding:30px 26px 26px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.hero::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;
+  border:26px solid color-mix(in srgb, var(--lapis-ink) 14%, transparent);
+}
+.hero::before{
+  content:"";position:absolute;right:30px;top:20px;width:110px;height:110px;border-radius:50%;
+  background:color-mix(in srgb, var(--gold) 80%, transparent);
+  box-shadow:inset -26px 0 0 0 var(--lapis);
+}
+.hero h1{font-size:clamp(34px,7vw,56px);font-weight:700;position:relative;max-width:12ch}
+.hero p{margin:10px 0 0;position:relative;max-width:46ch;opacity:.95}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:20px;margin-top:18px;box-shadow:var(--shadow);
+}
+.card h2{font-size:24px;margin-bottom:10px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{
+  min-width:56px;padding:10px 18px;border-radius:12px;border:2px solid var(--line);
+  background:var(--surface-2);font-weight:800;
+}
+.seg button[aria-pressed="true"]{border-color:var(--lapis);background:var(--lapis);color:var(--lapis-ink)}
+.names{display:grid;gap:10px;margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.name-row{display:flex;align-items:center;gap:10px}
+.name-row input{
+  flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:2px solid var(--line);
+  background:var(--surface-2);color:var(--ink);font:inherit;
+}
+.pawn{
+  width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;
+  color:#fff;font-weight:800;font-size:14px;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);
+}
+.rules{margin:0;padding-left:20px;display:grid;gap:6px}
+.btn{
+  border:0;border-radius:14px;padding:14px 22px;font-weight:800;
+  background:var(--coral);color:#fff;box-shadow:0 4px 0 color-mix(in srgb, var(--coral) 60%, #000);
+  transition:transform .08s, box-shadow .08s;
+}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 color-mix(in srgb, var(--coral) 60%, #000)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:var(--surface-2);color:var(--ink);border:2px solid var(--line);box-shadow:none}
+.btn.big{font-size:19px;padding:16px 26px;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;color:var(--muted);font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.chip{width:18px;height:18px;border-radius:5px;display:inline-grid;place-items:center;font-size:12px;font-weight:800}
+
+/* ---------- Layar permainan ---------- */
+.game{
+  max-width:1140px;margin:0 auto;padding:14px 14px 40px;
+  display:grid;gap:14px;
+  grid-template-columns:minmax(0,1fr) 340px;
+  grid-template-areas:"board controls" "board scores";
+  align-items:start;
+}
+#boardArea{grid-area:board}
+#controls{grid-area:controls}
+#scores{grid-area:scores}
+@media (max-width:900px){
+  .game{grid-template-columns:minmax(0,1fr);grid-template-areas:"controls" "board" "scores"}
+}
+.panel{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);
+}
+.turn{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.turn .pawn{width:38px;height:38px;font-size:17px}
+.turn h2{font-size:22px}
+.turn small{color:var(--muted);display:block}
+.dice-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.dice{
+  width:72px;height:72px;flex:none;border-radius:16px;background:#fff;border:3px solid var(--lapis);
+  display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:9px;gap:2px;
+  box-shadow:0 4px 0 color-mix(in srgb, var(--lapis) 70%, #000);
+}
+.dice i{border-radius:50%;background:transparent;margin:auto;width:14px;height:14px}
+.dice i.on{background:#14233f}
+.dice.rolling{animation:shake .12s infinite}
+@keyframes shake{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg) translateY(-3px)}100%{transform:rotate(-8deg)}}
+.dice-info{font-size:14px;color:var(--muted)}
+.event{
+  margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);
+  border-left:6px solid var(--line);min-height:76px;font-size:15px;
+}
+.event b{display:block;font-family:var(--font-head);font-size:19px;margin-bottom:2px}
+.event.ladder{border-left-color:var(--turq)}
+.event.snake{border-left-color:var(--coral)}
+.event.quiz{border-left-color:var(--gold)}
+.score-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.score-list li{
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;
+  background:var(--surface-2);border:2px solid transparent;
+}
+.score-list li.me{border-color:var(--gold)}
+.score-list .meta{flex:1;min-width:0}
+.score-list .meta b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.score-list .meta span{font-size:13px;color:var(--muted)}
+.score-list .pos{font-weight:800;font-family:var(--font-head);font-size:22px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.topbar h1{font-size:24px}
+.topbar .btn{padding:8px 14px;font-size:14px}
+
+/* Papan */
+.board-wrap{
+  width:min(100%, calc(100vh - 150px), 720px);
+  min-width:min(100%,280px);
+  margin:0 auto;container-type:inline-size;
+}
+.board{
+  position:relative;aspect-ratio:1/1;width:100%;
+  border:6px solid var(--lapis);border-radius:14px;overflow:hidden;background:var(--cell-a);
+  box-shadow:var(--shadow);
+}
+.grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr)}
+.cell{
+  position:relative;display:grid;place-items:center;
+  border:.5px solid color-mix(in srgb, var(--lapis) 22%, transparent);
+}
+.cell.alt{background:var(--cell-b)}
+.cell:not(.alt){background:var(--cell-a)}
+.cell .n{position:absolute;left:4%;top:2%;font-size:2.1cqw;font-weight:800;color:var(--muted);line-height:1}
+.cell .ic{font-size:3.4cqw;font-weight:800;line-height:1}
+.cell.quiz{background:var(--quiz)}
+.cell.quiz .n{color:var(--quiz-ink)}
+.cell.quiz .ic{color:var(--quiz-ink)}
+.cell.finish{background:var(--turq)}
+.cell.finish .n{color:#fff}
+.cell.start{background:var(--gold)}
+.cell.start .n{color:#2a1c00}
+.cell.finish .ic,.cell.start .ic{font-size:3.6cqw}
+svg.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tokens{position:absolute;inset:0;pointer-events:none}
+.token{
+  position:absolute;width:4.8%;height:4.8%;border-radius:50%;
+  transform:translate(-50%,-50%);display:grid;place-items:center;
+  color:#fff;font-weight:800;font-size:2.4cqw;border:.5cqw solid #fff;
+  box-shadow:0 .4cqw 1cqw rgba(0,0,0,.45);
+  transition:left .2s ease,top .2s ease;z-index:2;
+}
+.token.slide{transition:left .9s ease-in-out,top .9s ease-in-out}
+.token.active{z-index:3;animation:bob .8s ease-in-out infinite}
+@keyframes bob{50%{transform:translate(-50%,-62%)}}
+
+/* Modal */
+.overlay-bg{
+  position:fixed;inset:0;background:rgba(6,12,26,.66);display:none;
+  align-items:center;justify-content:center;padding:16px;z-index:50;
+  padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:max(16px,env(safe-area-inset-bottom,0px));
+}
+.overlay-bg.show{display:flex}
+.modal{
+  background:var(--surface);color:var(--ink);border-radius:18px;max-width:560px;width:100%;
+  max-height:100%;overflow:auto;padding:22px;border:2px solid var(--gold);box-shadow:var(--shadow);
+}
+.modal .who{color:var(--muted);font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.modal h2{font-size:25px;margin-bottom:14px}
+.opts{display:grid;gap:10px}
+.opt{
+  text-align:left;padding:12px 14px;border-radius:12px;border:2px solid var(--line);
+  background:var(--surface-2);display:flex;gap:12px;align-items:flex-start;font-weight:600;
+}
+.opt .k{
+  flex:none;width:28px;height:28px;border-radius:8px;background:var(--lapis);color:var(--lapis-ink);
+  display:grid;place-items:center;font-weight:800;font-size:14px;
+}
+.opt:hover:not(:disabled){border-color:var(--lapis)}
+.opt.right{border-color:var(--good);background:color-mix(in srgb, var(--good) 18%, var(--surface))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb, var(--bad) 16%, var(--surface))}
+.opt:disabled{cursor:default}
+.explain{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--surface-2);display:none}
+.explain.show{display:block}
+.explain b.res{display:block;font-family:var(--font-head);font-size:21px;margin-bottom:2px}
+.explain b.res.ok{color:var(--good)}
+.explain b.res.no{color:var(--bad)}
+.modal .actions{margin-top:14px;display:flex;justify-content:flex-end}
+.win-table{width:100%;border-collapse:collapse;margin:12px 0}
+.win-table th,.win-table td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.win-table th{color:var(--muted);font-weight:600;font-size:14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){
+  .dice.rolling,.token.active{animation:none}
+  .token,.token.slide{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== LAYAR AWAL ========== -->
+<section id="setup" class="screen active">
+  <div class="setup">
+    <div class="hero">
+      <h1>Ular Tangga Daulah Usmaniyah</h1>
+      <p>Permainan belajar PAI tentang sejarah peradaban Islam: dari berdirinya kesultanan tahun 1299 M sampai berakhirnya khilafah tahun 1924 M.</p>
+    </div>
+
+    <div class="card">
+      <h2>Siapa yang bermain?</h2>
+      <div class="seg" id="countSeg" role="group" aria-label="Jumlah pemain"></div>
+      <div class="names" id="nameInputs"></div>
+    </div>
+
+    <div class="card">
+      <h2>Cara bermain</h2>
+      <ol class="rules">
+        <li>Lempar dadu secara bergiliran. Bidak maju sesuai angka dadu.</li>
+        <li>Mendarat di kaki <b>tangga</b>: naik. Itu peristiwa kejayaan Daulah Usmaniyah.</li>
+        <li>Mendarat di kepala <b>ular</b>: turun. Itu peristiwa kemunduran Daulah Usmaniyah.</li>
+        <li>Mendarat di petak <b>?</b> kuning: jawab satu soal. Jawaban benar memberi bonus maju 2 petak.</li>
+        <li>Dadu angka 6 memberi giliran tambahan.</li>
+        <li>Pemenang adalah yang pertama tiba di petak 100 dengan angka dadu yang pas.</li>
+      </ol>
+      <div class="legend">
+        <span><i class="chip" style="background:var(--turq);color:#fff">↑</i> Tangga: naik</span>
+        <span><i class="chip" style="background:var(--coral);color:#fff">↓</i> Ular: turun</span>
+        <span><i class="chip" style="background:var(--quiz);color:var(--quiz-ink)">?</i> Soal PAI</span>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <button class="btn big" id="startBtn">Mulai bermain</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LAYAR PERMAINAN ========== -->
+<section id="gameScreen" class="screen">
+  <div class="game">
+    <div id="controls" class="panel">
+      <div class="topbar">
+        <h1>Daulah Usmaniyah</h1>
+        <button class="btn ghost" id="quitBtn">Keluar</button>
+      </div>
+      <div class="turn">
+        <div class="pawn" id="turnPawn">1</div>
+        <div>
+          <h2 id="turnName">Pemain 1</h2>
+          <small id="turnSub">Giliranmu melempar dadu</small>
+        </div>
+      </div>
+      <div class="dice-row">
+        <div class="dice" id="dice" aria-hidden="true"></div>
+        <div class="dice-info" id="diceInfo">Tekan tombol untuk melempar dadu.</div>
+      </div>
+      <button class="btn big" id="rollBtn">Lempar dadu</button>
+      <div class="event" id="eventBox" aria-live="polite">
+        <b>Selamat bermain</b>
+        Ucapkan basmalah, lalu lempar dadu pertamamu.
+      </div>
+    </div>
+
+    <div id="boardArea">
+      <div class="board-wrap">
+        <div class="board" id="board">
+          <div class="grid" id="grid"></div>
+          <svg class="overlay" id="overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="tokens" id="tokens"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="scores" class="panel">
+      <h2 style="font-size:22px">Papan skor</h2>
+      <ul class="score-list" id="scoreList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MODAL SOAL ========== -->
+<div class="overlay-bg" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="qText">
+  <div class="modal">
+    <div class="who"><span class="pawn" id="qPawn" style="width:26px;height:26px;font-size:12px">1</span><span id="qWho">Soal untuk Pemain 1</span></div>
+    <h2 id="qText"></h2>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain" id="qExplain"></div>
+    <div class="actions"><button class="btn" id="qNext" style="display:none">Lanjut</button></div>
+  </div>
+</div>
+
+<!-- ========== MODAL MENANG ========== -->
+<div class="overlay-bg" id="winModal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <div class="modal">
+    <h2 id="winTitle">Alhamdulillah, kamu menang!</h2>
+    <p id="winText"></p>
+    <table class="win-table">
+      <thead><tr><th>Pemain</th><th>Petak akhir</th><th>Soal benar</th></tr></thead>
+      <tbody id="winRows"></tbody>
+    </table>
+    <div class="actions" style="gap:10px">
+      <button class="btn ghost" id="winAgain">Atur ulang</button>
+      <button class="btn" id="winRematch">Main lagi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= DATA ================= */
+const LADDERS = {4:25, 9:31, 21:42, 28:55, 51:69, 63:84, 71:91};
+const SNAKES  = {98:79, 93:73, 87:64, 76:58, 66:47, 56:38, 44:23, 36:15, 17:7};
+const QUIZ_CELLS = new Set([6,12,19,26,33,40,49,53,60,68,75,82,89,96]);
+
+const EVENTS = {
+  4:  {t:"Utsman I mendirikan Kesultanan (1299 M)", d:"Utsman bin Ertugrul mendirikan negara di Anatolia barat laut. Dari sinilah nama Utsmani atau Usmaniyah berasal."},
+  9:  {t:"Orhan Gazi merebut Bursa (1326 M)", d:"Putra Utsman ini menjadikan Bursa sebagai ibu kota dan membentuk pasukan tetap yang teratur."},
+  21: {t:"Ekspansi Murad I ke Balkan", d:"Utsmani memperluas wilayah ke Eropa Tenggara, lalu menjadikan Edirne sebagai pusat pemerintahan."},
+  28: {t:"Al-Fatih menaklukkan Konstantinopel (1453 M)", d:"Pada 29 Mei 1453, Sultan Muhammad II (Al-Fatih) membuktikan kabar gembira Rasulullah SAW tentang penaklukan kota ini."},
+  51: {t:"Selim I menaklukkan Mesir (1517 M)", d:"Dinasti Mamluk runtuh, Mekah dan Madinah berada di bawah perlindungan Utsmani, dan kekhalifahan berpindah ke Utsmani."},
+  63: {t:"Masa keemasan Sulaiman Al-Qanuni", d:"Pada 1520–1566 M, wilayah Utsmani membentang di tiga benua dan hukum disusun dengan rapi."},
+  71: {t:"Karya agung Mimar Sinan", d:"Arsitek besar ini membangun masjid-masjid megah, di antaranya Masjid Sulaymaniyah dan Masjid Selimiye."},
+  98: {t:"Kegagalan merebut Wina (1683 M)", d:"Pengepungan Wina gagal. Sejak itu Utsmani lebih sering bertahan daripada menyerang."},
+  93: {t:"Perjanjian Karlowitz (1699 M)", d:"Utsmani untuk pertama kalinya menyerahkan wilayah penting di Eropa, termasuk Hongaria."},
+  87: {t:"Kemunduran disiplin pasukan", d:"Pasukan Yanisari tidak lagi setangguh dulu, sementara persenjataan Eropa semakin maju."},
+  76: {t:"Pemberontakan Yanisari dan korupsi", d:"Pasukan elit yang semula setia ikut berpolitik. Korupsi pejabat melemahkan negara."},
+  66: {t:"Kalah dari Timur Lenk di Ankara (1402 M)", d:"Sultan Bayezid I kalah dan ditawan. Negara hampir hancur dan pulih setelah beberapa tahun."},
+  56: {t:"Kekalahan armada di Lepanto (1571 M)", d:"Armada laut Utsmani kalah dari gabungan armada Eropa dan kekuatan lautnya menurun."},
+  44: {t:"Masuk Perang Dunia I (1914 M)", d:"Utsmani bergabung dengan Blok Sentral dan kalah. Wilayah Arabnya terlepas satu per satu."},
+  36: {t:"Perebutan takhta antar pangeran", d:"Pergantian sultan yang tidak teratur dan perebutan kekuasaan membuat pemerintahan goyah."},
+  17: {t:"Kapitulasi dan utang luar negeri", d:"Hak istimewa bagi pedagang asing dan utang yang menumpuk melemahkan ekonomi."}
+};
+
+const QUESTIONS = [
+  {q:"Siapa pendiri Daulah Usmaniyah?", a:"Utsman bin Ertugrul (Utsman I)", w:["Muhammad Al-Fatih","Sulaiman Al-Qanuni","Orhan Gazi"], e:"Utsman I mendirikan kesultanan ini sekitar tahun 1299 M. Nama Utsmani atau Usmaniyah diambil dari namanya."},
+  {q:"Daulah Usmaniyah berdiri sekitar tahun...", a:"1299 M", w:["1453 M","1517 M","1258 M"], e:"Tahun 1299 M dianggap awal berdirinya. Tahun 1453 M adalah penaklukan Konstantinopel, dan 1517 M penaklukan Mesir."},
+  {q:"Utsman I berasal dari suku...", a:"Kayi (rumpun Turki Oghuz)", w:["Quraisy","Mongol","Berber"], e:"Suku Kayi adalah bagian dari bangsa Turki Oghuz yang hijrah ke Anatolia."},
+  {q:"Siapa ayah dari Utsman I?", a:"Ertugrul", w:["Orhan","Murad","Bayezid"], e:"Ertugrul memimpin suku Kayi dan menetap di daerah Sögüt, Anatolia."},
+  {q:"Kota yang direbut Orhan Gazi pada 1326 M dan dijadikan ibu kota adalah...", a:"Bursa", w:["Kairo","Damaskus","Baghdad"], e:"Bursa menjadi ibu kota pertama yang besar. Kemudian ibu kota pindah ke Edirne dan akhirnya ke Istanbul."},
+  {q:"Siapa penakluk Konstantinopel?", a:"Sultan Muhammad II (Al-Fatih)", w:["Sultan Selim I","Sultan Bayezid I","Sultan Abdul Hamid II"], e:"Muhammad Al-Fatih memimpin penaklukan pada tahun 1453 M, saat berusia 21 tahun."},
+  {q:"Kapan Konstantinopel ditaklukkan?", a:"29 Mei 1453", w:["10 Oktober 1517","1 November 1922","3 Maret 1924"], e:"Setelah pengepungan sekitar 53 hari, pasukan Utsmani berhasil masuk kota pada 29 Mei 1453."},
+  {q:"Berapa usia Muhammad Al-Fatih saat menaklukkan Konstantinopel?", a:"21 tahun", w:["17 tahun","30 tahun","40 tahun"], e:"Ia lahir tahun 1432 M dan naik takhta saat masih muda. Usia 21 tahun ia memimpin penaklukan besar itu."},
+  {q:"Penaklukan Konstantinopel adalah perwujudan kabar gembira (bisyarah) dari...", a:"Rasulullah SAW", w:["Khalifah Umar bin Khattab","Sultan Sulaiman","Raja Justinian"], e:"Rasulullah SAW mengabarkan bahwa Konstantinopel akan ditaklukkan, dan memuji pemimpin serta pasukan yang menaklukkannya (HR. Ahmad)."},
+  {q:"Gereja besar di Konstantinopel yang diubah menjadi masjid setelah penaklukan adalah...", a:"Hagia Sophia (Aya Sofya)", w:["Notre Dame","Basilika Santo Petrus","Katedral Santiago"], e:"Al-Fatih mengubahnya menjadi masjid dan melindungi bangunan-bangunan ibadah lain milik non-Muslim."},
+  {q:"Setelah ditaklukkan, Konstantinopel kemudian lebih dikenal dengan nama...", a:"Istanbul", w:["Ankara","Bursa","Izmir"], e:"Nama Istanbul dipakai luas pada masa Utsmani dan menjadi nama resmi kota pada masa Republik Turki."},
+  {q:"Siapa guru spiritual Al-Fatih yang menanamkan keyakinan bahwa ia calon penakluk Konstantinopel?", a:"Syekh Aq Syamsuddin", w:["Imam Al-Ghazali","Ibnu Sina","Jalaluddin Rumi"], e:"Syekh Aq Syamsuddin mendidik Al-Fatih dalam ilmu agama dan menguatkan semangat jihadnya."},
+  {q:"Masa keemasan Daulah Usmaniyah terjadi pada pemerintahan...", a:"Sulaiman Al-Qanuni", w:["Bayezid I","Murad II","Abdul Hamid II"], e:"Sulaiman memerintah 1520–1566 M. Wilayah, ilmu, seni, dan hukum berkembang pesat."},
+  {q:"Gelar 'Al-Qanuni' pada Sultan Sulaiman bermakna...", a:"Pembuat undang-undang", w:["Penakluk","Pembangun masjid","Panglima laut"], e:"Qanun berarti hukum. Ia menyusun aturan negara yang melengkapi syariat dan menegakkan keadilan."},
+  {q:"Penaklukan Mesir oleh Sultan Selim I tahun 1517 M membawa akibat...", a:"Kekhalifahan berpindah ke Utsmani", w:["Konstantinopel jatuh","Andalusia direbut","Wina dikuasai"], e:"Dinasti Mamluk di Mesir runtuh. Sultan Utsmani kemudian memegang kekhalifahan dan menjadi pelindung Dua Kota Suci."},
+  {q:"Pasukan elit infanteri Utsmani yang terkenal disebut...", a:"Yanisari", w:["Mamluk","Murabithun","Templar"], e:"Yanisari (Janissary) adalah pasukan elit yang setia kepada sultan, tetapi di masa akhir justru sering memberontak."},
+  {q:"Siapa arsitek besar masjid-masjid Utsmani seperti Masjid Sulaymaniyah?", a:"Mimar Sinan", w:["Al-Jazari","Ibnu Khaldun","Al-Khawarizmi"], e:"Mimar Sinan mengabdi pada beberapa sultan dan merancang ratusan bangunan."},
+  {q:"Sistem 'millet' pada masa Utsmani memberi hak apa kepada non-Muslim?", a:"Otonomi dan kebebasan menjalankan agamanya", w:["Wajib berpindah agama","Dilarang berdagang","Dilarang tinggal di kota"], e:"Sistem ini mencerminkan toleransi beragama. Setiap komunitas mengatur urusan agama dan hukum keluarganya sendiri."},
+  {q:"Gerakan pembaruan pada abad ke-19 yang mengubah sistem pemerintahan Utsmani disebut...", a:"Tanzimat", w:["Devshirme","Futuhat","Hijrah"], e:"Tanzimat dimulai tahun 1839 M. Tujuannya memperbaiki administrasi, hukum, dan militer agar mengikuti kemajuan zaman."},
+  {q:"Sultan yang menolak keras permintaan Theodor Herzl untuk membeli tanah Palestina adalah...", a:"Sultan Abdul Hamid II", w:["Sultan Selim III","Sultan Murad IV","Sultan Mehmed VI"], e:"Abdul Hamid II (1876–1909 M) mempertahankan Palestina meski negara sedang kesulitan keuangan."},
+  {q:"Siapa tokoh yang menghapus kekhalifahan Utsmani pada 3 Maret 1924?", a:"Mustafa Kemal Ataturk", w:["Enver Pasha","Timur Lenk","Theodor Herzl"], e:"Setelah menghapus kesultanan (1922) dan memproklamasikan Republik Turki (1923), Mustafa Kemal menghapus khilafah pada 1924."},
+  {q:"Khalifah terakhir Daulah Usmaniyah adalah...", a:"Abdul Majid II", w:["Abdul Hamid II","Mehmed VI","Selim III"], e:"Mehmed VI adalah sultan terakhir (dicopot 1922). Abdul Majid II menjabat khalifah saja sampai 1924."},
+  {q:"Kerajaan Islam di Nusantara yang menjalin hubungan erat dengan Utsmani adalah...", a:"Kesultanan Aceh Darussalam", w:["Sriwijaya","Majapahit","Kutai"], e:"Aceh meminta bantuan Utsmani menghadapi Portugis. Utsmani mengirim ahli militer dan persenjataan."},
+  {q:"Salah satu penyebab internal kemunduran Daulah Usmaniyah adalah...", a:"Sultan penerus yang lemah dan korupsi pejabat", w:["Terlalu banyak membangun masjid","Larangan berdagang","Terlalu fokus berdakwah"], e:"Selain itu militer tertinggal dalam teknologi dan ekonomi melemah akibat utang."},
+  {q:"Teladan utama dari persiapan Al-Fatih menaklukkan Konstantinopel adalah...", a:"Persiapan matang disertai ibadah dan tawakal", w:["Mengandalkan keberuntungan","Menolak bermusyawarah","Mengutamakan harta rampasan"], e:"Ia menyiapkan pasukan, meriam, dan armada, serta menjaga salat dan tawakal kepada Allah SWT."},
+  {q:"Pada Perang Dunia I, Utsmani bergabung dengan...", a:"Blok Sentral (bersama Jerman)", w:["Blok Sekutu","Blok Timur","Pakta Warsawa"], e:"Kekalahan dalam perang ini mempercepat runtuhnya Daulah Usmaniyah."},
+  {q:"Daulah Usmaniyah pernah menguasai wilayah di tiga benua, yaitu...", a:"Asia, Afrika, dan Eropa", w:["Asia, Amerika, dan Australia","Eropa, Amerika, dan Afrika","Asia, Australia, dan Eropa"], e:"Wilayahnya membentang dari Balkan, Anatolia, Timur Tengah, hingga Afrika Utara."},
+  {q:"Gelar Sultan Utsmani terhadap Mekah dan Madinah sejak 1517 M adalah...", a:"Khadimul Haramain (pelayan dua tanah suci)", w:["Amirul Bahr","Syaikhul Islam","Wazir Agung"], e:"Sultan bertanggung jawab menjaga keamanan jemaah haji dan memperbaiki fasilitas di Mekah dan Madinah."},
+
+  /* ===== Soal tambahan: awal berdiri dan ekspansi ===== */
+  {q:"Berapa lama kira-kira Daulah Usmaniyah berkuasa (1299–1924 M)?", a:"Lebih dari enam abad", w:["Sekitar satu abad","Sekitar tiga abad","Lebih dari sepuluh abad"], e:"Dari 1299 sampai 1924 M berarti sekitar 625 tahun. Ini menjadikannya salah satu pemerintahan Islam terlama dalam sejarah."},
+  {q:"Sebelum berdiri sendiri, wilayah tempat Utsman I memimpin dulunya berada di bawah pengaruh Kesultanan Saljuk Rum yang melemah akibat serangan bangsa...", a:"Mongol", w:["Viking","Khmer","Aztec"], e:"Serangan Mongol melemahkan Saljuk Rum. Para pemimpin perbatasan seperti Utsman memanfaatkan keadaan itu untuk membangun negara sendiri."},
+  {q:"Setelah Bursa, ibu kota Utsmani berpindah ke kota di Eropa bernama...", a:"Edirne (Adrianopel)", w:["Athena","Sofia","Wina"], e:"Edirne dikuasai pada masa Murad I. Dari sana Utsmani lebih mudah bergerak ke Balkan."},
+  {q:"Sultan Murad I gugur dalam peperangan di wilayah...", a:"Kosovo (1389 M)", w:["Wina","Mohács","Ankara"], e:"Pertempuran Kosovo 1389 M mengukuhkan kekuasaan Utsmani di Balkan, meskipun Sultan Murad I wafat di sana."},
+  {q:"Sultan Bayezid I dijuluki 'Yildirim' karena kecepatan gerak pasukannya. Arti Yildirim adalah...", a:"Petir atau halilintar", w:["Singa","Pedang","Bintang"], e:"Julukan ini menggambarkan serangannya yang cepat dan mengejutkan lawan."},
+  {q:"Pada 1396 M, Bayezid I mengalahkan pasukan salib Eropa dalam pertempuran di...", a:"Nikopolis", w:["Lepanto","Preveza","Mohács"], e:"Kemenangan di Nikopolis memperkuat posisi Utsmani di Balkan."},
+  {q:"Pada 1402 M Sultan Bayezid I kalah dan ditawan oleh pasukan...", a:"Timur Lenk", w:["Salahuddin Al-Ayyubi","Raja Louis IX","Kaisar Justinian"], e:"Kekalahan di Ankara memicu masa kekacauan yang berlangsung sekitar sebelas tahun sebelum negara pulih kembali."},
+  {q:"Siapa nama ayah dari Muhammad Al-Fatih?", a:"Sultan Murad II", w:["Sultan Bayezid I","Sultan Selim I","Sultan Orhan"], e:"Murad II adalah sultan yang bijak dan tangguh. Ia membesarkan Al-Fatih dengan pendidikan agama dan kemiliteran yang kuat."},
+  {q:"Arti gelar 'Al-Fatih' adalah...", a:"Sang Penakluk", w:["Sang Pembangun","Sang Pemberi Hukum","Sang Pelindung Kota"], e:"Gelar ini disematkan setelah Muhammad II menaklukkan Konstantinopel pada 1453 M."},
+
+  /* ===== Penaklukan Konstantinopel ===== */
+  {q:"Sebelum ditaklukkan Al-Fatih, Konstantinopel adalah ibu kota kekaisaran...", a:"Bizantium (Romawi Timur)", w:["Persia Sasaniyah","Mongol","Romawi Barat"], e:"Konstantinopel adalah pusat Kekaisaran Bizantium selama lebih dari seribu tahun."},
+  {q:"Siapa kaisar Bizantium terakhir yang gugur mempertahankan Konstantinopel?", a:"Konstantinus XI", w:["Heraklius","Justinian I","Konstantinus I"], e:"Konstantinus XI gugur saat pasukan Utsmani menembus pertahanan kota pada 29 Mei 1453."},
+  {q:"Meriam raksasa yang digunakan Al-Fatih untuk menghancurkan tembok Konstantinopel dibuat oleh insinyur bernama...", a:"Orban (Urban)", w:["Mimar Sinan","Piri Reis","Al-Jazari"], e:"Meriam Orban sangat besar sehingga dapat meruntuhkan bagian tembok Theodosius yang selama ratusan tahun sulit ditembus."},
+  {q:"Strategi cerdik Al-Fatih agar armadanya bisa masuk ke teluk yang dirantai oleh Bizantium adalah...", a:"Memindahkan kapal lewat daratan ke Tanduk Emas", w:["Menggali terowongan bawah laut","Membakar semua rantai dengan api","Meminta izin kepada Bizantium"], e:"Kapal-kapal ditarik di atas jalur kayu yang diolesi minyak melewati bukit di Galata, lalu diturunkan ke Teluk Tanduk Emas (Golden Horn)."},
+  {q:"Sahabat Nabi yang wafat saat ikut pengepungan Konstantinopel di masa awal Islam dan makamnya diziarahi hingga kini adalah...", a:"Abu Ayyub Al-Anshari", w:["Abu Bakar Ash-Shiddiq","Khalid bin Walid","Bilal bin Rabah"], e:"Abu Ayyub Al-Anshari wafat dalam pengepungan di masa Muawiyah. Makamnya ditemukan kembali dan dimuliakan pada masa Al-Fatih."},
+  {q:"Hadis tentang kabar gembira penaklukan Konstantinopel dicatat dalam kitab...", a:"Musnad Imam Ahmad", w:["Muwatta Imam Malik","Al-Umm Imam Syafi'i","Ar-Risalah"], e:"Imam Ahmad meriwayatkan hadis ini dalam Musnad-nya. Isinya memuji pemimpin dan pasukan yang kelak menaklukkan Konstantinopel."},
+  {q:"Kompleks istana yang dibangun Al-Fatih sebagai pusat pemerintahan di Istanbul adalah...", a:"Istana Topkapi", w:["Istana Alhambra","Istana Versailles","Istana Kremlin"], e:"Topkapi menjadi pusat pemerintahan dan tempat tinggal sultan selama berabad-abad."},
+
+  /* ===== Masa kejayaan ===== */
+  {q:"Pertempuran Chaldiran (1514 M) dimenangkan Sultan Selim I atas...", a:"Dinasti Safawi", w:["Dinasti Mamluk","Kekaisaran Habsburg","Kerajaan Hongaria"], e:"Kemenangan ini mengamankan wilayah timur Anatolia bagi Utsmani."},
+  {q:"Di Marj Dabiq (1516 M) dan Ridaniyya (1517 M), Sultan Selim I mengalahkan...", a:"Dinasti Mamluk", w:["Dinasti Safawi","Bani Umayyah","Kerajaan Venesia"], e:"Setelah kemenangan ini, Syam dan Mesir masuk wilayah Utsmani."},
+  {q:"Pertempuran Mohács (1526 M) adalah kemenangan Sultan Sulaiman atas...", a:"Kerajaan Hongaria", w:["Kerajaan Portugis","Dinasti Safawi","Dinasti Mamluk"], e:"Kemenangan di Mohács membuka jalan bagi Utsmani menguasai sebagian besar Hongaria."},
+  {q:"Pada 1522 M Sultan Sulaiman menaklukkan sebuah pulau strategis di Laut Tengah, yaitu...", a:"Rhodes", w:["Sisilia","Kreta Utara","Siprus Barat"], e:"Rhodes sebelumnya dikuasai para ksatria Santo Yohanes. Penaklukannya mengamankan jalur laut Utsmani ke Mesir."},
+  {q:"Laksamana Utsmani yang terkenal memenangkan Pertempuran Preveza (1538 M) adalah...", a:"Barbaros Hayreddin Pasha", w:["Piri Reis","Mimar Sinan","Khalid bin Walid"], e:"Barbaros Hayreddin memimpin armada Utsmani yang menguasai Laut Tengah pada masanya."},
+  {q:"Piri Reis, tokoh Utsmani, terkenal sebagai pembuat...", a:"Peta dunia", w:["Meriam raksasa","Kitab hadis","Jam menara"], e:"Peta Piri Reis (1513 M) menjadi salah satu peta dunia paling terkenal pada masanya, tanda majunya ilmu geografi di masa Utsmani."},
+  {q:"Orang Eropa menyebut Sulaiman Al-Qanuni dengan julukan...", a:"The Magnificent (Yang Agung)", w:["The Conqueror","The Lightning","The Silent"], e:"Julukan itu lahir dari kekaguman Eropa pada kekayaan, kekuatan, dan kebudayaan Utsmani di masanya."},
+  {q:"Mazhab fikih resmi yang dipakai pemerintahan Utsmani adalah...", a:"Mazhab Hanafi", w:["Mazhab Maliki","Mazhab Hambali","Mazhab Zhahiri"], e:"Mazhab Hanafi dipakai di pengadilan resmi, meskipun mazhab lain tetap dihormati dan dipraktikkan di wilayah masing-masing."},
+  {q:"Pejabat tertinggi urusan agama dan fatwa pada masa Utsmani disebut...", a:"Syaikhul Islam", w:["Wazir Agung","Panglima Yanisari","Kapudan Pasha"], e:"Syaikhul Islam memberi fatwa tentang kesesuaian kebijakan negara dengan syariat."},
+  {q:"Perdana menteri yang memimpin pemerintahan sehari-hari kesultanan disebut...", a:"Wazir Agung (Sadrazam)", w:["Syaikhul Islam","Kapudan Pasha","Mufti Daerah"], e:"Sadrazam menjalankan urusan negara atas nama sultan."},
+  {q:"Sistem devshirme pada masa Utsmani adalah...", a:"Perekrutan anak-anak Balkan untuk dididik menjadi Yanisari dan pejabat", w:["Pajak khusus bagi petani","Kewajiban belajar bahasa Arab","Sistem pelayaran dagang"], e:"Anak-anak yang direkrut dididik di istana dan dikenal setia kepada sultan. Sistem ini kemudian berubah dan melemah di masa akhir."},
+  {q:"Aksara yang digunakan untuk menulis bahasa Turki Utsmani adalah aksara...", a:"Arab", w:["Latin","Kiril","Hanzi"], e:"Pada 1928 Republik Turki menggantinya dengan aksara Latin sebagai bagian dari reformasi Mustafa Kemal."},
+  {q:"Masjid Biru (Sultan Ahmed) di Istanbul dibangun pada masa Sultan...", a:"Ahmed I", w:["Muhammad II","Selim III","Murad I"], e:"Dibangun pada 1609–1616 M, dinamai Masjid Biru karena hiasan keramik biru Iznik di bagian dalamnya."},
+  {q:"Keramik atau ubin berwarna biru yang menghiasi masjid-masjid Utsmani terkenal berasal dari kota...", a:"Iznik", w:["Konya","Samsun","Trabzon"], e:"Ubin Iznik merupakan kebanggaan seni Utsmani dan banyak dipakai pada masjid-masjid besar."},
+
+  /* ===== Hubungan dengan Nusantara ===== */
+  {q:"Kesultanan Aceh meminta bantuan Utsmani untuk melawan bangsa...", a:"Portugis", w:["Mongol","Tartar","Hun"], e:"Portugis menguasai Malaka dan mengganggu jalur dagang serta jemaah haji dari Nusantara."},
+  {q:"Sultan Aceh yang mengirim utusan kepada Utsmani pada abad ke-16 adalah...", a:"Sultan Alauddin Riayat Syah Al-Kahhar", w:["Sultan Agung","Sultan Hasanuddin","Sultan Trenggono"], e:"Utsmani menanggapi permintaan itu dengan mengirim ahli senjata, ahli perang, dan persenjataan."},
+
+  /* ===== Masa kemunduran dan keruntuhan ===== */
+  {q:"Pada masa kemundurannya, bangsa Eropa menjuluki Utsmani sebagai...", a:"Orang sakit dari Eropa (the Sick Man of Europe)", w:["Singa dari Timur","Macan Mediterania","Elang Balkan"], e:"Julukan ini muncul karena wilayah Utsmani terus menyusut dan ekonominya melemah, sementara negara-negara Eropa berebut pengaruh."},
+  {q:"Konstitusi pertama Utsmani (Kanun-i Esasi) diberlakukan pada tahun...", a:"1876 M", w:["1453 M","1699 M","1924 M"], e:"Konstitusi ini diberlakukan di awal masa pemerintahan Sultan Abdul Hamid II."},
+  {q:"Kebijakan Sultan Abdul Hamid II untuk mempererat persatuan umat Islam di dunia disebut...", a:"Pan-Islamisme", w:["Sekularisme","Nasionalisme Turki","Devshirme"], e:"Ia menggalang dukungan umat Islam dunia dan memperkuat peran khalifah sebagai pemersatu."},
+  {q:"Jalur kereta Hijaz yang dibangun masa Abdul Hamid II menghubungkan Damaskus dengan...", a:"Madinah", w:["Kairo","Baghdad","Istanbul"], e:"Proyek ini dibiayai sumbangan umat Islam dari berbagai negara dan bertujuan memudahkan perjalanan haji."},
+  {q:"Sultan Abdul Hamid II digulingkan pada 1909 M setelah munculnya gerakan...", a:"Turki Muda (Persatuan dan Kemajuan)", w:["Mamluk","Safawi","Yanisari"], e:"Gerakan ini menuntut pemerintahan konstitusional dan kemudian mendominasi politik Utsmani sampai Perang Dunia I."},
+  {q:"Perjanjian rahasia Sykes–Picot (1916 M) adalah kesepakatan Inggris dan Prancis untuk...", a:"Membagi wilayah Arab bekas Utsmani", w:["Membangun jalur kereta Hijaz","Membantu Utsmani melawan Rusia","Mengakui Republik Turki"], e:"Kesepakatan ini menjadi dasar pembagian wilayah Timur Tengah setelah Utsmani kalah dalam Perang Dunia I."},
+  {q:"Kesultanan Utsmani secara resmi dihapus pada tanggal...", a:"1 November 1922", w:["29 Mei 1453","3 Maret 1924","28 Oktober 1914"], e:"Kesultanan dihapus lebih dulu oleh Majelis Nasional Agung Turki. Khilafah menyusul dihapus pada 3 Maret 1924."},
+  {q:"Republik Turki diproklamasikan pada tanggal...", a:"29 Oktober 1923", w:["1 November 1922","3 Maret 1924","29 Mei 1453"], e:"Mustafa Kemal Ataturk menjadi presiden pertamanya."},
+  {q:"Sultan terakhir Utsmani yang dicopot pada 1922 adalah...", a:"Mehmed VI (Vahdettin)", w:["Abdul Majid II","Abdul Hamid II","Murad V"], e:"Setelah Mehmed VI pergi, Abdul Majid II hanya diangkat sebagai khalifah tanpa kekuasaan politik sampai 1924."},
+
+  /* ===== Hikmah dan nilai ===== */
+  {q:"Pelajaran penting dari runtuhnya Daulah Usmaniyah bagi umat Islam adalah...", a:"Pentingnya persatuan, ilmu pengetahuan, dan pemimpin yang amanah", w:["Menjauhi kemajuan teknologi","Menghindari kerja sama antarbangsa","Menghentikan pendidikan agama"], e:"Kemunduran terjadi karena korupsi, perpecahan, ketertinggalan ilmu dan teknologi, serta campur tangan kekuatan asing."},
+  {q:"Sikap toleransi pada sistem millet sesuai dengan prinsip Al-Qur'an dalam surah...", a:"Al-Kafirun ayat 6", w:["Al-Ikhlas ayat 1","Al-Fatihah ayat 1","Al-Asr ayat 1"], e:"Ayat 'Untukmu agamamu, dan untukku agamaku' menjadi dasar toleransi dalam beragama tanpa mencampuradukkan akidah."},
+  {q:"Nilai yang dapat diteladani dari kepemimpinan Sulaiman Al-Qanuni adalah...", a:"Menegakkan keadilan dan hukum bagi semua rakyat", w:["Mengutamakan keluarga dalam jabatan","Menolak bermusyawarah","Menutup diri dari ilmu"], e:"Ia dikenal menyusun hukum yang tertib dan memperhatikan kesejahteraan rakyat dari berbagai latar belakang."}
+];
+
+const COLORS = ["#c8372a","#0f8d8a","#7a4fb5","#d08a00"];
+const DOT_MAP = {1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+
+/* ================= STATE ================= */
+const $ = s => document.querySelector(s);
+let setupCount = 2;
+let players = [];
+let cur = 0;
+let busy = false;
+let over = false;
+let pool = [];
+let lastSetupNames = [];
+
+/* ================= UTIL ================= */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function cellCenter(n){
+  const idx = n-1, row = Math.floor(idx/10);
+  let col = idx%10;
+  if(row%2===1) col = 9-col;
+  return {x:(col+0.5)*10, y:(9-row+0.5)*10};
+}
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active", s.id===id));
+  window.scrollTo(0,0);
+}
+
+/* ================= SETUP ================= */
+function buildSetup(){
+  const seg = $("#countSeg");
+  seg.innerHTML = "";
+  [1,2,3,4].forEach(n=>{
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = n + (n===1 ? " pemain" : " pemain");
+    b.setAttribute("aria-pressed", String(n===setupCount));
+    b.addEventListener("click", ()=>{ setupCount = n; buildSetup(); });
+    seg.appendChild(b);
+  });
+  const box = $("#nameInputs");
+  box.innerHTML = "";
+  for(let i=0;i<setupCount;i++){
+    const row = document.createElement("div");
+    row.className = "name-row";
+    const p = document.createElement("span");
+    p.className = "pawn"; p.style.background = COLORS[i]; p.textContent = i+1;
+    const inp = document.createElement("input");
+    inp.type = "text"; inp.maxLength = 14; inp.value = lastSetupNames[i] || ("Pemain " + (i+1));
+    inp.setAttribute("aria-label","Nama pemain " + (i+1));
+    inp.addEventListener("input", ()=>{ lastSetupNames[i] = inp.value; });
+    row.append(p, inp);
+    box.appendChild(row);
+  }
+}
+
+/* ================= PAPAN ================= */
+function buildBoard(){
+  const grid = $("#grid");
+  grid.innerHTML = "";
+  for(let r=0;r<10;r++){
+    const boardRow = 9-r;
+    for(let c=0;c<10;c++){
+      const n = boardRow%2===0 ? boardRow*10 + c + 1 : boardRow*10 + 10 - c;
+      const d = document.createElement("div");
+      d.className = "cell" + ((r+c)%2 ? " alt" : "");
+      d.dataset.n = n;
+      const num = document.createElement("span"); num.className = "n"; num.textContent = n;
+      d.appendChild(num);
+      if(n===1){ d.classList.add("start"); addIcon(d,"Mulai"); d.querySelector(".ic").style.fontSize="1.9cqw"; }
+      else if(n===100){ d.classList.add("finish"); addIcon(d,"🕌"); }
+      else if(QUIZ_CELLS.has(n)){ d.classList.add("quiz"); addIcon(d,"?"); }
+      grid.appendChild(d);
+    }
+  }
+  drawOverlay();
+}
+function addIcon(cell, t){
+  const s = document.createElement("span"); s.className = "ic"; s.textContent = t; cell.appendChild(s);
+}
+function svgEl(name, attrs){
+  const e = document.createElementNS("http://www.w3.org/2000/svg", name);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+function drawOverlay(){
+  const svg = $("#overlay");
+  svg.innerHTML = "";
+  const css = getComputedStyle(document.documentElement);
+  const ladderColor = css.getPropertyValue("--ladder").trim() || "#7a4a1e";
+
+  // Tangga
+  Object.entries(LADDERS).forEach(([s,e])=>{
+    const a = cellCenter(+s), b = cellCenter(+e);
+    const dx = b.x-a.x, dy = b.y-a.y, len = Math.hypot(dx,dy);
+    const ux = dx/len, uy = dy/len, nx = -uy, ny = ux, off = 1.5;
+    const g = svgEl("g", {});
+    const rails = [[1,-1],[1,1]];
+    // palang dulu
+    for(let t=3; t<len-1; t+=4.2){
+      const px = a.x+ux*t, py = a.y+uy*t;
+      g.appendChild(svgEl("line",{x1:px-nx*off,y1:py-ny*off,x2:px+nx*off,y2:py+ny*off,stroke:ladderColor,"stroke-width":.7,"stroke-linecap":"round"}));
+    }
+    [-1,1].forEach(sign=>{
+      g.appendChild(svgEl("line",{x1:a.x+nx*off*sign,y1:a.y+ny*off*sign,x2:b.x+nx*off*sign,y2:b.y+ny*off*sign,stroke:ladderColor,"stroke-width":1,"stroke-linecap":"round"}));
+    });
+    g.setAttribute("opacity",".92");
+    svg.appendChild(g);
+  });
+
+  // Ular
+  const palettes = [["#2f9e44","#b7e07a"],["#c8372a","#ffd2a8"],["#6a3fb2","#d9c2ff"],["#0b7285","#a5e9ef"]];
+  Object.entries(SNAKES).forEach(([s,e],i)=>{
+    const h = cellCenter(+s), t = cellCenter(+e);
+    const dx = t.x-h.x, dy = t.y-h.y, len = Math.hypot(dx,dy);
+    const ux = dx/len, uy = dy/len, nx = -uy, ny = ux;
+    const waves = Math.max(2, Math.round(len/13));
+    const amp = 2.4, N = 48;
+    let d = "";
+    for(let k=0;k<=N;k++){
+      const f = k/N;
+      const o = Math.sin(f*Math.PI*waves) * amp * (0.35 + 0.65*Math.sin(f*Math.PI));
+      const px = h.x + dx*f + nx*o, py = h.y + dy*f + ny*o;
+      d += (k===0?"M":"L") + px.toFixed(2) + " " + py.toFixed(2) + " ";
+    }
+    const pal = palettes[i % palettes.length];
+    const g = svgEl("g", {opacity:".93"});
+    g.appendChild(svgEl("path",{d, fill:"none", stroke:pal[0], "stroke-width":2.1, "stroke-linecap":"round","stroke-linejoin":"round"}));
+    g.appendChild(svgEl("path",{d, fill:"none", stroke:pal[1], "stroke-width":.7, "stroke-dasharray":"1.1 1.5","stroke-linecap":"round","stroke-linejoin":"round"}));
+    // kepala
+    g.appendChild(svgEl("ellipse",{cx:h.x,cy:h.y,rx:2.3,ry:1.9,fill:pal[0],transform:`rotate(${Math.atan2(dy,dx)*180/Math.PI+180} ${h.x} ${h.y})`}));
+    const ex = h.x - ux*.5, ey = h.y - uy*.5;
+    g.appendChild(svgEl("circle",{cx:ex+nx*.9,cy:ey+ny*.9,r:.5,fill:"#fff"}));
+    g.appendChild(svgEl("circle",{cx:ex-nx*.9,cy:ey-ny*.9,r:.5,fill:"#fff"}));
+    g.appendChild(svgEl("circle",{cx:ex+nx*.9,cy:ey+ny*.9,r:.22,fill:"#111"}));
+    g.appendChild(svgEl("circle",{cx:ex-nx*.9,cy:ey-ny*.9,r:.22,fill:"#111"}));
+    g.appendChild(svgEl("line",{x1:h.x-ux*2.2,y1:h.y-uy*2.2,x2:h.x-ux*3.6,y2:h.y-uy*3.6,stroke:"#e03131","stroke-width":.35,"stroke-linecap":"round"}));
+    svg.appendChild(g);
+  });
+}
+
+function renderTokens(){
+  const layer = $("#tokens");
+  const groups = {};
+  players.forEach((p,i)=>{ (groups[p.pos] = groups[p.pos] || []).push(i); });
+  const offs = [[-1.3,-1.3],[1.3,-1.3],[-1.3,1.3],[1.3,1.3]];
+  players.forEach((p,i)=>{
+    let el = layer.querySelector(`[data-i="${i}"]`);
+    if(!el){
+      el = document.createElement("div");
+      el.className = "token"; el.dataset.i = i;
+      el.style.background = COLORS[i];
+      el.textContent = i+1;
+      layer.appendChild(el);
+    }
+    const c = p.pos < 1 ? cellCenter(1) : cellCenter(p.pos);
+    const grp = groups[p.pos] || [i];
+    const k = grp.length>1 ? grp.indexOf(i) : -1;
+    const o = k>=0 ? offs[k%4] : [0,0];
+    el.style.left = (c.x + o[0]) + "%";
+    el.style.top  = (c.y + o[1]) + "%";
+    el.classList.toggle("active", i===cur && !over);
+  });
+}
+
+/* ================= UI ================= */
+function drawDice(v){
+  const d = $("#dice");
+  d.innerHTML = "";
+  const on = new Set(DOT_MAP[v] || []);
+  for(let i=0;i<9;i++){
+    const dot = document.createElement("i");
+    if(on.has(i)) dot.className = "on";
+    d.appendChild(dot);
+  }
+}
+function setEvent(kind, title, text){
+  const box = $("#eventBox");
+  box.className = "event" + (kind ? " " + kind : "");
+  box.innerHTML = "";
+  const b = document.createElement("b"); b.textContent = title;
+  box.append(b, document.createTextNode(text));
+}
+function renderTurn(){
+  const p = players[cur];
+  const pawn = $("#turnPawn");
+  pawn.style.background = COLORS[cur]; pawn.textContent = cur+1;
+  $("#turnName").textContent = p.name;
+  $("#turnSub").textContent = p.extra ? "Giliran tambahan, lempar lagi" : "Giliranmu melempar dadu";
+  $("#rollBtn").disabled = busy || over;
+  $("#rollBtn").textContent = "Lempar dadu";
+}
+function renderScores(){
+  const ul = $("#scoreList");
+  ul.innerHTML = "";
+  players.forEach((p,i)=>{
+    const li = document.createElement("li");
+    if(i===cur && !over) li.className = "me";
+    const pawn = document.createElement("span");
+    pawn.className = "pawn"; pawn.style.background = COLORS[i]; pawn.textContent = i+1;
+    const meta = document.createElement("div"); meta.className = "meta";
+    const b = document.createElement("b"); b.textContent = p.name;
+    const s = document.createElement("span"); s.textContent = `Soal benar ${p.correct} dari ${p.answered}`;
+    meta.append(b, s);
+    const pos = document.createElement("div"); pos.className = "pos"; pos.textContent = p.pos < 1 ? "Mulai" : p.pos;
+    if(p.pos<1) pos.style.fontSize = "15px";
+    li.append(pawn, meta, pos);
+    ul.appendChild(li);
+  });
+}
+function refresh(){
+  renderTurn(); renderScores(); renderTokens();
+}
+
+/* ================= GERAK ================= */
+async function moveTo(p, target, perStep=180){
+  const fast = reduced() ? 0 : perStep;
+  while(p.pos < target){
+    p.pos++;
+    renderTokens();
+    await sleep(fast);
+  }
+}
+async function jump(p, to){
+  const tk = document.querySelector(`#tokens [data-i="${players.indexOf(p)}"]`);
+  if(tk) tk.classList.add("slide");
+  p.pos = to;
+  renderTokens();
+  await sleep(reduced() ? 0 : 950);
+  if(tk) tk.classList.remove("slide");
+}
+
+/* ================= SOAL ================= */
+function nextQuestion(){
+  if(pool.length===0) pool = shuffle(QUESTIONS);
+  return pool.pop();
+}
+function askQuestion(p, idx){
+  return new Promise(resolve=>{
+    const q = nextQuestion();
+    $("#qPawn").style.background = COLORS[idx];
+    $("#qPawn").textContent = idx+1;
+    $("#qWho").textContent = "Soal untuk " + p.name;
+    $("#qText").textContent = q.q;
+    const opts = shuffle([q.a, ...q.w]);
+    const wrap = $("#qOpts");
+    wrap.innerHTML = "";
+    const ex = $("#qExplain");
+    ex.className = "explain"; ex.innerHTML = "";
+    const nextBtn = $("#qNext");
+    nextBtn.style.display = "none";
+    let answered = false, result = false;
+    opts.forEach((text,i)=>{
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "opt";
+      const k = document.createElement("span"); k.className = "k"; k.textContent = "ABCD"[i];
+      const t = document.createElement("span"); t.textContent = text;
+      b.append(k,t);
+      b.addEventListener("click", ()=>{
+        if(answered) return;
+        answered = true;
+        result = (text === q.a);
+        wrap.querySelectorAll(".opt").forEach(btn=>{
+          btn.disabled = true;
+          const tx = btn.lastChild.textContent;
+          if(tx === q.a) btn.classList.add("right");
+          else if(btn===b) btn.classList.add("wrong");
+        });
+        const res = document.createElement("b");
+        res.className = "res " + (result ? "ok" : "no");
+        res.textContent = result ? "Benar! Maju 2 petak." : "Belum tepat. Bidak tetap di tempat.";
+        ex.append(res, document.createTextNode(q.e));
+        ex.classList.add("show");
+        nextBtn.style.display = "";
+        nextBtn.focus();
+      });
+      wrap.appendChild(b);
+    });
+    $("#quizModal").classList.add("show");
+    nextBtn.onclick = ()=>{
+      $("#quizModal").classList.remove("show");
+      resolve(result);
+    };
+  });
+}
+
+/* ================= ALUR GILIRAN ================= */
+async function roll(){
+  if(busy || over) return;
+  busy = true;
+  $("#rollBtn").disabled = true;
+  const p = players[cur];
+  const diceEl = $("#dice");
+  diceEl.classList.add("rolling");
+  const spins = reduced() ? 1 : 9;
+  for(let i=0;i<spins;i++){ drawDice(1+Math.floor(Math.random()*6)); await sleep(75); }
+  const v = 1 + Math.floor(Math.random()*6);
+  drawDice(v);
+  diceEl.classList.remove("rolling");
+  $("#diceInfo").textContent = `${p.name} mendapat angka ${v}.`;
+
+  if(p.pos + v > 100){
+    setEvent("", "Angka terlalu besar", `Kamu butuh angka ${100-p.pos} atau kurang untuk tiba tepat di petak 100.`);
+  } else {
+    await moveTo(p, p.pos + v);
+    await resolveLanding(p);
+  }
+
+  if(p.pos === 100){ win(p); return; }
+
+  if(v === 6){
+    p.extra = true;
+  } else {
+    p.extra = false;
+    cur = (cur + 1) % players.length;
+    players[cur].extra = false;
+  }
+  busy = false;
+  refresh();
+}
+
+async function resolveLanding(p){
+  const idx = players.indexOf(p);
+  // Petak soal
+  if(QUIZ_CELLS.has(p.pos)){
+    setEvent("quiz","Petak soal PAI","Jawab dengan benar untuk maju 2 petak.");
+    const ok = await askQuestion(p, idx);
+    p.answered++;
+    if(ok){
+      p.correct++;
+      const bonus = Math.min(2, 100 - p.pos);
+      if(bonus>0) await moveTo(p, p.pos + bonus);
+      setEvent("quiz","Jawaban benar", `${p.name} mendapat bonus maju ${bonus} petak.`);
+    } else {
+      setEvent("quiz","Jawaban belum tepat", `${p.name} tetap di petak ${p.pos}. Baca penjelasan tadi untuk bekal soal berikutnya.`);
+    }
+    renderScores();
+    await sleep(reduced() ? 0 : 350);
+  }
+  // Tangga atau ular
+  if(p.pos < 100){
+    if(LADDERS[p.pos]){
+      const ev = EVENTS[p.pos], to = LADDERS[p.pos];
+      setEvent("ladder", "Tangga: " + ev.t, ev.d + ` Naik ke petak ${to}.`);
+      await sleep(reduced() ? 0 : 500);
+      await jump(p, to);
+    } else if(SNAKES[p.pos]){
+      const ev = EVENTS[p.pos], to = SNAKES[p.pos];
+      setEvent("snake", "Ular: " + ev.t, ev.d + ` Turun ke petak ${to}.`);
+      await sleep(reduced() ? 0 : 500);
+      await jump(p, to);
+    }
+  }
+  renderScores();
+}
+
+function win(p){
+  over = true; busy = false;
+  refresh();
+  $("#winTitle").textContent = `Alhamdulillah, ${p.name} menang!`;
+  $("#winText").textContent = "Kamu tiba di petak 100 dan menaklukkan Konstantinopel versimu sendiri. Pelajari lagi peristiwa-peristiwa penting Daulah Usmaniyah untuk permainan berikutnya.";
+  const body = $("#winRows");
+  body.innerHTML = "";
+  const order = players.map((x,i)=>({x,i})).sort((a,b)=>b.x.pos-a.x.pos || b.x.correct-a.x.correct);
+  order.forEach(({x,i})=>{
+    const tr = document.createElement("tr");
+    const c1 = document.createElement("td");
+    const dot = document.createElement("span"); dot.className = "pawn"; dot.style.cssText = `display:inline-grid;width:22px;height:22px;font-size:11px;vertical-align:middle;margin-right:8px;background:${COLORS[i]}`; dot.textContent = i+1;
+    c1.append(dot, document.createTextNode(x.name));
+    const c2 = document.createElement("td"); c2.textContent = x.pos;
+    const c3 = document.createElement("td"); c3.textContent = `${x.correct} dari ${x.answered}`;
+    tr.append(c1,c2,c3); body.appendChild(tr);
+  });
+  $("#winModal").classList.add("show");
+}
+
+/* ================= MULAI ================= */
+function startGame(){
+  const inputs = document.querySelectorAll("#nameInputs input");
+  players = [];
+  inputs.forEach((inp,i)=>{
+    const nm = inp.value.trim() || ("Pemain " + (i+1));
+    lastSetupNames[i] = nm;
+    players.push({name:nm, pos:0, correct:0, answered:0, extra:false});
+  });
+  cur = 0; busy = false; over = false;
+  pool = shuffle(QUESTIONS);
+  $("#tokens").innerHTML = "";
+  buildBoard();
+  drawDice(1);
+  $("#diceInfo").textContent = "Tekan tombol untuk melempar dadu.";
+  setEvent("", "Selamat bermain", "Ucapkan basmalah, lalu lempar dadu pertamamu.");
+  showScreen("gameScreen");
+  refresh();
+}
+
+/* ================= EVENT ================= */
+$("#startBtn").addEventListener("click", startGame);
+$("#rollBtn").addEventListener("click", roll);
+$("#quitBtn").addEventListener("click", ()=>{
+  if(busy && !over) return;
+  if(over || confirm("Keluar dari permainan dan kembali ke menu awal?")){
+    $("#winModal").classList.remove("show");
+    showScreen("setup");
+  }
+});
+$("#winAgain").addEventListener("click", ()=>{ $("#winModal").classList.remove("show"); showScreen("setup"); });
+$("#winRematch").addEventListener("click", ()=>{ $("#winModal").classList.remove("show"); startGame(); });
+
+// Gambar ulang ular/tangga saat tema berubah
+try{
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ()=>{
+    if($("#gameScreen").classList.contains("active")) drawOverlay();
+  });
+}catch(e){}
+
+buildSetup();
+})();
+</script>
+</body>
+</html>
